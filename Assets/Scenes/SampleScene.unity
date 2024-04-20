@@ -407,10 +407,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291647373fbf8bd449c8c4f65359d61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Bounds>k__BackingField: {x: 10, y: 10, z: 10}
+  <Bounds>k__BackingField: {x: 20, y: 20, z: 20}
   boidPrefab: {fileID: 1451098857374166926, guid: 64792eed6a727d9448919dfd0b11957e,
     type: 3}
-  boidSize: 400
+  boidSize: 200
 --- !u!4 &464138135
 Transform:
   m_ObjectHideFlags: 0

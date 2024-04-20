@@ -8,6 +8,7 @@ public class Boid : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxForce;
     [SerializeField] private float flockDetecctionRadius;
+    [SerializeField] private float boundRepMultiplier = 1;
 
     [SerializeField] private float seekInterval;
     private float nextTimeToSeek;
@@ -21,7 +22,11 @@ public class Boid : MonoBehaviour
     {
         nextTimeToSeek = seekInterval;
         bound = FindFirstObjectByType<BoidSimulation>().Bounds / 2;
-        Vector3 point = Random.onUnitSphere;
+        Vector3 point = new Vector3(
+            Random.Range(-bound.x, bound.x),
+            Random.Range(-bound.y, bound.y),
+            Random.Range(-bound.z, bound.z)
+        );
         Vector3 dir = (point - transform.position).normalized;
         transform.forward = dir;
     }
@@ -34,7 +39,7 @@ public class Boid : MonoBehaviour
         Velocity = Vector3.ClampMagnitude(Velocity, maxSpeed);
 
         Vector3 boundaryRepulsion = BoundSteer();
-        Velocity += boundaryRepulsion * Time.deltaTime;
+        Velocity += boundaryRepulsion * Time.deltaTime * boundRepMultiplier;
 
         transform.position += Velocity * Time.deltaTime;
         transform.forward = Velocity.normalized;
@@ -80,7 +85,14 @@ public class Boid : MonoBehaviour
         if (nextTimeToSeek <= 0)
         {
             nextTimeToSeek = seekInterval;
-            Vector3 point = Random.insideUnitSphere * bound.x / 2;
+
+            // Generate random point within the bounds of the simulation area
+            Vector3 point = new Vector3(
+                Random.Range(-bound.x, bound.x),
+                Random.Range(-bound.y, bound.y),
+                Random.Range(-bound.z, bound.z)
+            );
+
             Vector3 desiredVelocity = (point - transform.position).normalized * maxSpeed;
             steeringVector = desiredVelocity - Velocity;
 
