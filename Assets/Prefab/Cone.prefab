@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fov: 180
-  maxSpeed: 20
+  maxSpeed: 15
   maxForce: 4
   flockDetecctionRadius: 4
   boundRepMultiplier: 5
