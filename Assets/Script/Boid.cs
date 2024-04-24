@@ -38,8 +38,8 @@ public class Boid : MonoBehaviour
         Velocity += CalcuateSteering() * Time.deltaTime;
         Velocity = Vector3.ClampMagnitude(Velocity, maxSpeed);
 
-        Vector3 boundaryRepulsion = BoundSteer();
-        Velocity += boundaryRepulsion * Time.deltaTime * boundRepMultiplier;
+        /*        Vector3 boundaryRepulsion = BoundSteer();
+                Velocity += boundaryRepulsion * Time.deltaTime * boundRepMultiplier;*/
 
         transform.position += Velocity * Time.deltaTime;
         transform.forward = Velocity.normalized;
